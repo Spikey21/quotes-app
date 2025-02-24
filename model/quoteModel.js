@@ -1,5 +1,5 @@
 const { ObjectId } = require("mongodb")
-const mongoSinleton = require("../data/mongoDBSignleton")
+const mongoSinleton = require("../data/mongoDBSingleton")
 const ObjectId = require("mongodb").ObjectId
 
 function saveAll(quotes) {

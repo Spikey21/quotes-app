@@ -9,7 +9,7 @@ function saveAll(quotes) {
         if (result.insertedCount) {
             resolve(result)
         } else {
-            reject("couldnt save quotes")
+            reject("Couldnt save quotes")
         }
     })
 }
@@ -22,7 +22,7 @@ function getAll() {
         if (result.length>0) {
             resolve(result)
         } else {
-            reject("couldnt get quotes")
+            reject("Couldnt get quotes")
         }
     })
 }
@@ -34,7 +34,7 @@ function getById(id) {
         if (result) {
             resolve(result)
         } else {
-            reject("couldnt get quote by Id" + id)
+            reject("Couldnt get quote by Id" + id)
         }
     })
 }

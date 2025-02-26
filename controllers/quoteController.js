@@ -69,3 +69,10 @@ async function prepareDB() {
         return null
     }
 }
+
+module.exports = {
+    getQuote,
+    getQuotes,
+    getRandom,
+    prepareDB
+}

@@ -1,4 +1,4 @@
-const Quote =require("../data/quoteModel")
+const Quote =require("../model/quoteModel")
 
 async function getQuotes() {
     try {

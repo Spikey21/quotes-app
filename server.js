@@ -32,6 +32,17 @@ const server = http.createServer(
                 quote = {message: "Quote not found"}
             }
             res.end(JSON.stringify(quote))
+        }  else
+        if (req.url.match(/\/api\/quotes\/([0-9]+)/) && req.method === "GET") {
+            const id = req.url.split("/")[3]
+            let quote = await getQuote(id)
+            if (quote) {
+                res.writeHead(200, API_CONTENT_TYPE)
+            } else {
+                res.writeHead(404, API_CONTENT_TYPE)
+                quote = {message: "Quote not found"}
+            }
+            res.end(JSON.stringify(quote))
         } else {
             serveStaticFile(req, res)
         }

@@ -5,7 +5,7 @@ class RandomQuote {
     init() {
         this.quoteContainer = document.querySelector("#quote-container")
         this.quote = document.querySelector("#quote")
-        this.quoteBtn = document.querySelector("#next-joke")
+        this.quoteBtn = document.querySelector("#next-quote")
         this.author = document.querySelector("#author")
 
         this.quoteBtn.addEventListener("click", this.getQuote)

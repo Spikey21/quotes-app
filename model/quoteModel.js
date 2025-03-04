@@ -1,10 +1,10 @@
 
-const mongoSinleton = require("../data/mongoDBSingleton")
-const ObjectId = require("mongodb").ObjectId
+const mongoSingleton = require("../data/mongoDBSingleton")
+const ObjectId = require("mongodb").ObjectId; 
 
 function saveAll(quotes) {
     return new Promise (async (resolve, reject) => {
-        const collection = await mongoSinleton.getCollection()
+        const collection = await mongoSingleton.getCollection()
         const result = await collection.insertMany(quotes)
         if (result.insertedCount) {
             resolve(result)
@@ -16,7 +16,7 @@ function saveAll(quotes) {
 
 function getAll() {
     return new Promise (async (resolve, reject) => {
-        const collection = await mongoSinleton.getCollection()
+        const collection = await mongoSingleton.getCollection()
         const cursor = collection.find()
         const result = await cursor.toArray()
         if (result.length>0) {
@@ -29,8 +29,8 @@ function getAll() {
 
 function getById(id) {
     return new Promise (async (resolve, reject) => {
-        const collection = await mongoSinleton.getCollection()
-        const result = await collection.findOne({_id: ObjectId(id)})
+        const collection = await mongoSingleton.getCollection()
+        const result = await collection.findOne({_id: new ObjectId(id)})
         if (result) {
             resolve(result)
         } else {

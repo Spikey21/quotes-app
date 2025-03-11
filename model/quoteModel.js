@@ -38,8 +38,54 @@ function getById(id) {
         }
     })
 }
+
+function deleteById(Id) {
+    return new Promise (async (resolve, reject) => {
+        const collection = await mongoSingleton.getCollection()
+        const result = await collection.deleteMany({_id: new ObjectId(id)})
+        if (result && result.deletedCount>0) {
+            resolve(result)
+        } else {
+            reject("Couldnt delete quote by Id" + id)
+        }
+    })
+}
+
+function updateById(Id) {
+    return new Promise (async (resolve, reject) => {
+        const collection = await mongoSingleton.getCollection()
+        const result = await collection.updateOne(
+            {
+                _id: new ObjectId(id)
+            },
+            { 
+                $set: updateFields
+            })
+        if (result && result.matchedCount>0) {
+            resolve(result)
+        } else {
+            reject("Couldnt update quote by Id" + id)
+        }
+    })
+}
+
+function insertOne(quote) {
+    return new Promise (async (resolve, reject) => {
+        const collection = await mongoSingleton.getCollection()
+        const result = await collection.insertOne(quote)
+        if (result && result.insertedId>0) {
+            resolve(result)
+        } else {
+            reject("Couldnt insert new quote")
+        }
+    })
+}
+
 module.exports = {
     getAll,
     getById,
-    saveAll
+    saveAll,
+    deleteById,
+    updateById,
+    insertOne
 }

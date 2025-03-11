@@ -39,7 +39,7 @@ function getById(id) {
     })
 }
 
-function deleteById(Id) {
+function deleteById(id) {
     return new Promise (async (resolve, reject) => {
         const collection = await mongoSingleton.getCollection()
         const result = await collection.deleteMany({_id: new ObjectId(id)})
@@ -51,7 +51,7 @@ function deleteById(Id) {
     })
 }
 
-function updateById(Id) {
+function updateById(id, updateFields) {
     return new Promise (async (resolve, reject) => {
         const collection = await mongoSingleton.getCollection()
         const result = await collection.updateOne(

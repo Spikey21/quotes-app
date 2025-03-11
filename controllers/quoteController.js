@@ -70,9 +70,44 @@ async function prepareDB() {
     }
 }
 
+async function deleteQuote(id) {
+    try {
+        const result = await Quote.deleteById(id)
+    } catch (error) {
+        console.log(error);
+        return null
+    }
+}
+
+async function updateQuote(id, quote) {
+    try {
+        const result = await Quote.updateById(id,quote)
+    } catch (error) {
+        console.log(error);
+        return null
+    }
+}
+
+async function insertQuote(quote) {
+    try {
+        const result = await Quote.insertOne(quote)
+        if (result && result.insertedId) {
+            return result
+        } else {
+            return null
+        }
+    } catch (error) {
+        console.log(error);
+        return null
+    }
+}
+
 module.exports = {
     getQuote,
     getQuotes,
     getRandom,
-    prepareDB
+    prepareDB,
+    deleteQuote,
+    updateQuote,
+    insertQuote
 }

@@ -19,7 +19,35 @@ class QuoteEditor {
     }
 
     reloadQuotesList = async () => {
-        
+        this.removeAllChildNodes(this.quoteList)
+
+        const quotes = await this.getQuotes()
+        for (const q of quotes) {
+            const quoteHtml = this.getQuoteHtmlListItem(q)
+            this.reloadQuotesList.appendChild(quoteHtml)
+        }
+    }
+
+    getQuoteHtmlListItem = (quoteData) => {
+
+    }
+
+    getQuotes = async () => {
+        try {
+            const response = await fetch("/api/quotes")
+            const data = await response.json()
+            return data
+        } catch (error) {
+            console.error(error);   
+        }
+
+        return null;
+    }
+
+    removeAllChildNodes(parent) {
+        while(parent.firstChild) {
+            parent.removeChild(parent.firstChild)
+        }
     }
 }
 

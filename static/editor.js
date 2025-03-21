@@ -24,12 +24,29 @@ class QuoteEditor {
         const quotes = await this.getQuotes()
         for (const q of quotes) {
             const quoteHtml = this.getQuoteHtmlListItem(q)
-            this.reloadQuotesList.appendChild(quoteHtml)
+            this.quoteList.appendChild(quoteHtml)
         }
     }
 
     getQuoteHtmlListItem = (quoteData) => {
+        const html = `
+            <div class="quote-list-item">
+                ${quoteData.author}: ${quoteData.quote}
+            </div>
+            <div class="quote-list-item-delete">
+                <a href="#" quote-id="${quoteData._id}" >X</a<
+            </div>
+        `
 
+        const li = document.createElement("li")
+        li.classList.add("list-item")
+        li.innerHTML = html
+
+        li.querySelector("a").addEventListener("click", e => {
+            this.deleteQuote(quoteData._id)
+        })
+
+        return li
     }
 
     getQuotes = async () => {

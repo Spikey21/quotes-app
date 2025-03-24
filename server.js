@@ -70,18 +70,19 @@ const server = http.createServer(
             })
             req.on("end", async function () {
                 const quote = JSON.parse(data)
+                let response = {}
                 if (!quote || !quote._id) {
                     res.writeHead(404, API_CONTENT_TYPE)
                     response = {message: "Quote not found"}
                 } else {
-                    let response = {}
                     const result = await deleteQuote(quote._id)
                     if (result && result.deletedCount > 0) {
                         res.writeHead(200, API_CONTENT_TYPE)
                         response = {deleted: true,}
+                    } else {
+                        res.writeHead(404, API_CONTENT_TYPE)
+                        response = {deleted: false}
                     }
-                    res.writeHead(404, API_CONTENT_TYPE)
-                    response = {deleted: false}
                 }
                 res.end(JSON.stringify(response))
             })

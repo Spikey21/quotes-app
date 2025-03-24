@@ -73,7 +73,7 @@ function insertOne(quote) {
     return new Promise (async (resolve, reject) => {
         const collection = await mongoSingleton.getCollection()
         const result = await collection.insertOne(quote)
-        if (result && result.insertedId>0) {
+        if (result && result.insertedId) {
             resolve(result)
         } else {
             reject("Couldnt insert new quote")

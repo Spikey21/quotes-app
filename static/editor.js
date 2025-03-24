@@ -39,7 +39,7 @@ class QuoteEditor {
                 ${quoteData.author}: ${quoteData.quote}
             </div>
             <div class="quote-list-item-delete">
-                <a href="#" quote-id="${quoteData._id}" >X</a<
+                <a href="#" quote-id="${quoteData._id}" >X</a>
             </div>
         `
 
@@ -95,6 +95,25 @@ class QuoteEditor {
             this.quoteText.value = ""
             this.quoteAuthor.value = ""
         }
+    }
+
+    deleteQuote = async (id) => {
+        const response = await fetch("/api/quote/delete", {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                _id: id
+            })
+        })
+
+        const data = await response.json()
+        if (data && data.deleted === true) {
+            console.log("deleted quote");
+        }
+        this.reloadQuotesList()
     }
 }
 
